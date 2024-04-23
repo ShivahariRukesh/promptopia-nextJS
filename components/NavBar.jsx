@@ -20,7 +20,6 @@ const NavBar = () => {
 
   return (
     <>
-      {console.log("The provider val", providers)}
       <nav className="flex-between w-full mb-16 pt-3">
         <Link href="/" className="flex gap-2 flex-center">
           LogoImg
@@ -39,7 +38,7 @@ const NavBar = () => {
                   LogOut
                 </button>
                 <Image
-                  src="/assets/icons/profile.jpg"
+                  src={session?.user.image}
                   height={32}
                   width={32}
                   className="rounded-full"
@@ -69,7 +68,7 @@ const NavBar = () => {
           {session?.user ? (
             <div className="flex">
               <Image
-                src="/assets/icons/profile.jpg"
+                src={session?.user.image}
                 height={37}
                 width={37}
                 className="rounded-full"

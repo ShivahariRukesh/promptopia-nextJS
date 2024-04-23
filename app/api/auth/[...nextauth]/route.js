@@ -10,39 +10,40 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  async session({ session }) {
-    const sessionUser = await User.findOne({
-      email: session.user.email,
-    });
-
-    session.user.id = sessionUser._id.toString();
-    return session;
-  },
-
-  //   To get the user session we have to first signIn
-
-  async signIn({ profile }) {
-    try {
-      await connectToDB();
-
-      //check if userExist
-      const userExist = await User.findOne({
-        email: profile.email,
+  callbacks: {
+    async session({ session }) {
+      const sessionUser = await User.findOne({
+        email: session.user.email,
       });
 
-      //If not then create user
-      if (!userExist) {
-        await User.create({
+      session.user.id = sessionUser._id.toString();
+      return session;
+    },
+
+    //   To get the user session we have to first signIn
+
+    async signIn({ profile }) {
+      try {
+        await connectToDB();
+
+        //check if userExist
+        const userExist = await User.findOne({
           email: profile.email,
-          username: profile.name,
-          image: profile.img,
         });
+        //If not then create user
+        if (!userExist) {
+          await User.create({
+            email: profile.email,
+            username: profile.name.replace(" ", "").toLowerCase(),
+            image: profile.img,
+          });
+        }
+        return true;
+      } catch (error) {
+        console.log("Err in signIN", error);
+        return false;
       }
-      return true;
-    } catch (error) {
-      console.log("Err in signIN", error);
-      return false;
-    }
+    },
   },
 });
 
