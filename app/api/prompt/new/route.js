@@ -16,6 +16,6 @@ export const POST = async (req) => {
     return new Response(JSON.stringify(newPrompt), { status: 200 });
   } catch (err) {
     console.log("Error connecting to database when posting");
-    return new Response(JSON.stringify(newPrompt), { status: 200 });
+    return new Response(JSON.stringify({ msg: err }), { status: 200 });
   }
 };
