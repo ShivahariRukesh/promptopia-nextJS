@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
   // console.log(post.creator.image);
+  const handleCopy = () => {};
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -25,12 +26,10 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
             <h3 className="font-satoshi font-semibold text-gray-900">
               {post.creator.username}
             </h3>
-            <p className="font-inter text-sm text-gray-500">
-              {post.creator.email}
-            </p>
+            <p className="font-inter text-sm text-gray-500">{post.tag}</p>
           </div>
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
+        {/* <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === post.prompt
@@ -41,9 +40,9 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
             width={12}
             height={12}
           />
-        </div>
+        </div> */}
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
+      {/* <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(post.tag)}
@@ -65,7 +64,7 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
             Delete
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
