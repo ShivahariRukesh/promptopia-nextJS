@@ -24,6 +24,7 @@ const page = () => {
           prompt: post.prompt,
           userId: session?.user.id,
           tag: post.tag,
+          image: session?.user.image,
         }),
       });
       if (response.ok) {

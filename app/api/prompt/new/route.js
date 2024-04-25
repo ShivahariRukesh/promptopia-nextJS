@@ -3,7 +3,7 @@ import Prompt from "@models/propmt";
 
 export const POST = async (req) => {
   // I think POST is keyword here for posting
-  const { userId, prompt, tag } = await req.json();
+  const { userId, prompt, tag, image } = await req.json();
 
   try {
     await connectToDB();
@@ -11,6 +11,7 @@ export const POST = async (req) => {
       creator: userId,
       tag,
       prompt,
+      image,
     });
     newPrompt.save();
     return new Response(JSON.stringify(newPrompt), { status: 200 });
