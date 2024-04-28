@@ -3,10 +3,20 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
-  // console.log(post.creator.image);
-  const handleCopy = () => {};
+  const [copied, setCopied] = useState();
+
+  const handleCopy = () => {
+    setCopied(post.prompt);
+    console.log(copied);
+    navigator.clipboard.writeText(post.prompt);
+    setTimeout(() => {
+      setCopied("");
+      console.log(copied);
+    }, 3000);
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -33,7 +43,7 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
           <Image
             src={
               copied === post.prompt
-                ? "/assets/icons/tick.svg"
+                ? "/assets/icons/doubletick.svg"
                 : "/assets/icons/copy.svg"
             }
             alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
@@ -49,7 +59,7 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
       >
         #{post.tag}
       </p>
-      {session?.user.id === post.creator._id && pathName === "/profile" && (
+      {/* {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
@@ -64,7 +74,7 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
             Delete
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -4,6 +4,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import PromptCard from "./PromptCard";
 const Feed = () => {
+  const [prompts, setPrompts] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
+
   const handleTagClick = () => {};
   //This PromptCardList is rendered inside this file  because this component is only used in this Feed component
   const PromptCardList = ({ data, handleTagClick }) => {
@@ -21,10 +25,6 @@ const Feed = () => {
       </div>
     );
   };
-
-  const [prompts, setPrompts] = useState([]);
-
-  const [searchText, setSearchText] = useState("");
 
   const handleSearchChange = (e) => {};
 
