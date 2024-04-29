@@ -37,13 +37,15 @@ const NavBar = () => {
                 <button className="outline_btn" onClick={signOut}>
                   LogOut
                 </button>
-                <Image
-                  src={session?.user.image}
-                  height={32}
-                  width={32}
-                  className="rounded-full"
-                  onClick={() => setDropDown((prev) => !prev)}
-                />
+                <Link href="/profile">
+                  <Image
+                    src={session?.user.image}
+                    height={32}
+                    width={32}
+                    className="rounded-full"
+                    onClick={() => setDropDown((prev) => !prev)}
+                  />
+                </Link>
               </div>
             </div>
           ) : (

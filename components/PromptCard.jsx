@@ -5,7 +5,10 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
+const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
   const [copied, setCopied] = useState();
 
   const handleCopy = () => {
@@ -18,9 +21,6 @@ const PromptCard = ({ post, handleTagClick, handelEdit, handleDelete }) => {
     }, 3000);
   };
 
-  const handleEdit = () => {};
-
-  const handleDelete = () => {};
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
