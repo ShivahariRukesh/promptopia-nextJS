@@ -18,10 +18,21 @@ const MyProfile = () => {
     if (session?.user.id) fetchPosts();
   }, []);
 
-  async function handleDelete() {}
-  const handleEdit = (e) => {
+  async function handleDelete(po) {
+    try {
+      console.log("delete log", po._id);
+      const res = await fetch(`/api/prompt/${po._id}`, {
+        method: "DELETE",
+      });
+      router.push("/");
+    } catch (err) {
+      console.log("DeletionPrompt error", err);
+    }
+  }
+
+  const handleEdit = (po) => {
     console.log("Passed");
-    router.push(`/profile/update-prompt?id=dasdasd`);
+    router.push(`/profile/update-prompt?id=${po._id}`);
   };
   return (
     <>
