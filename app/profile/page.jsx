@@ -19,14 +19,20 @@ const MyProfile = () => {
   }, []);
 
   async function handleDelete(po) {
-    try {
-      console.log("delete log", po._id);
-      const res = await fetch(`/api/prompt/${po._id}`, {
-        method: "DELETE",
-      });
-      router.push("/");
-    } catch (err) {
-      console.log("DeletionPrompt error", err);
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this prompt?"
+    );
+
+    if (hasConfirmed) {
+      try {
+        console.log("delete log", po._id);
+        const res = await fetch(`/api/prompt/${po._id}`, {
+          method: "DELETE",
+        });
+        router.push("/");
+      } catch (err) {
+        console.log("DeletionPrompt error", err);
+      }
     }
   }
 

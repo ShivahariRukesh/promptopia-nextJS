@@ -14,19 +14,31 @@ const Feed = () => {
     return (
       <div className="mt-16 prompt_layout">
         {data.map((item) => {
-          return (
-            <PromptCard
-              key={item._id}
-              post={item}
-              handleTagClick={handleTagClick}
-            />
-          );
+          if (searchText === "") {
+            return (
+              <PromptCard
+                key={item._id}
+                post={item}
+                handleTagClick={handleTagClick}
+              />
+            );
+          } else if (item.title === searchText || item.tag === searchText) {
+            return (
+              <PromptCard
+                key={item._id}
+                post={item}
+                handleTagClick={handleTagClick}
+              />
+            );
+          }
         })}
       </div>
     );
   };
 
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
   useEffect(() => {
     const fetchFunc = async () => {
@@ -55,9 +67,9 @@ const Feed = () => {
       <PromptCardList data={prompts} handleTagClick={handleTagClick} />
       {/* All Prompts */}
       {/* {searchText ? (
-        <PromptCardList data={prompts} handleTagClick={handleTagClick} />
+        <PromptCardList data={searchText} handleTagClick={handleTagClick} />
       ) : (
-        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+        <PromptCardList data={prompts} handleTagClick={handleTagClick} />
       )} */}
     </section>
   );
