@@ -38,13 +38,19 @@ const page = () => {
     }
   };
   return (
-    <Form
-      type="Create"
-      post={post}
-      setPost={setPost}
-      submitted={submit}
-      handleSubmit={createPrompt}
-    />
+    <>
+      {session ? (
+        <Form
+          type="Create"
+          post={post}
+          setPost={setPost}
+          submitted={submit}
+          handleSubmit={createPrompt}
+        />
+      ) : (
+        <div>Please Login First</div>
+      )}
+    </>
   );
 };
 

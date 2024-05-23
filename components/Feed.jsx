@@ -22,7 +22,10 @@ const Feed = () => {
                 handleTagClick={handleTagClick}
               />
             );
-          } else if (item.title === searchText || item.tag === searchText) {
+          } else if (
+            item?.prompt?.includes(searchText) ||
+            item?.tag?.includes(searchText)
+          ) {
             return (
               <PromptCard
                 key={item._id}
